@@ -8,7 +8,74 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: {
+      layout: 'main-layout'
+    }
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    meta: {
+      layout: 'empty-layout'
+    },
+    component: () => import('../views/Login')
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    meta: {
+      layout: 'empty-layout'
+    },
+    component: () => import('../views/Register')
+  },
+  {
+    path: '/categories',
+    name: 'Categories',
+    meta: {
+      layout: 'main-layout'
+    },
+    component: () => import('../views/Categories')
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    meta: {
+      layout: 'main-layout'
+    },
+    component: () => import('../views/Profile')
+  },
+  {
+    path: '/planing',
+    name: 'Planing',
+    meta: {
+      layout: 'main-layout'
+    },
+    component: () => import('../views/Planning')
+  },
+  {
+    path: '/record',
+    name: 'Record',
+    meta: {
+      layout: 'main-layout'
+    },
+    component: () => import('../views/Record')
+  },
+  {
+    path: '/history',
+    name: 'History',
+    meta: {
+      layout: 'main-layout'
+    },
+    component: () => import('../views/History')
+  },
+  {
+    path: '/detail-record',
+    name: 'Detail Record',
+    meta: {
+      layout: 'main-layout'
+    },
+    component: () => import('../views/History')
   }
 ]
 
