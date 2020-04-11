@@ -48,8 +48,9 @@ export default {
     dropdown: null
   }),
   methods: {
-    logout () {
-      this.$router.push('/login?message=logout')
+    async logout () {
+      await this.$store.dispatch('logOut')
+      await this.$router.push('/login?message=logout')
     }
   },
   mounted () {

@@ -49,6 +49,19 @@
           v-if="$v.username.$dirty && !$v.username.required"
         >Поле Имя не должно быть пустым</small>
       </div>
+      <div class="input-field">
+        <input
+          id="last-name"
+          type="text"
+          v-model="lastName"
+          :class="{ invalid: ($v.lastName.$dirty && !$v.lastName.required)}"
+        >
+        <label for="name">Фамилия</label>
+        <small
+          class="helper-text invalid"
+          v-if="$v.lastName.$dirty && !$v.lastName.required"
+        >Поле Фамилия не должно быть пустым</small>
+      </div>
       <p>
         <label>
           <input
@@ -87,18 +100,20 @@ export default {
   name: 'Register',
   data: () => ({
     username: '',
+    lastName: '',
     email: '',
     password: '',
     checkbox: false
   }),
   validations: {
     username: { required },
+    lastName: { required },
     email: { required, email },
     password: { required, minLength: minLength(6) },
     checkbox: { checked: (v) => v }
   },
   methods: {
-    onSubmit () {
+    async onSubmit () {
       if (this.$v.$invalid) {
         this.$v.$touch()
         return true
@@ -106,12 +121,17 @@ export default {
 
       const formData = {
         username: this.username,
+        lastName: this.lastName,
         email: this.email,
         password: this.password
       }
 
-      console.log(formData)
-      this.$router.push('/login')
+      try {
+        await this.$store.dispatch('register', formData)
+        await this.$router.push('/')
+      } catch (e) {
+        throw new Error(e)
+      }
     }
   }
 }

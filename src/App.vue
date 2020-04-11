@@ -25,4 +25,7 @@ export default {
 <style lang="scss">
   @import "~materialize-css/dist/css/materialize.min.css";
   @import "assets/index.css";
+  .toast.error {
+    background: #f44336;
+  }
 </style>
