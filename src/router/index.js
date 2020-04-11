@@ -76,6 +76,22 @@ const routes = [
       layout: 'main-layout'
     },
     component: () => import('../views/History')
+  },
+  {
+    path: '/users',
+    name: 'Users',
+    meta: {
+      layout: 'main-layout'
+    },
+    component: () => import('../views/Users')
+  },
+  {
+    path: '/drivers',
+    name: 'Drivers',
+    meta: {
+      layout: 'main-layout'
+    },
+    component: () => import('../views/Drivers')
   }
 ]
 

@@ -62,6 +62,18 @@
           v-if="$v.lastName.$dirty && !$v.lastName.required"
         >Поле Фамилия не должно быть пустым</small>
       </div>
+      <div class="input-field">
+        <select ref="select" v-model="role"  >
+          <option value="" disabled selected>Choose your option</option>
+          <option value="user">Пользователь</option>
+          <option value="driver">Водитель</option>
+        </select>
+        <label>Выберите свою роль</label>
+        <small
+          class="helper-text invalid"
+          v-if="$v.role.$dirty && !$v.role.required"
+        >Роль должна быть выбрана</small>
+      </div>
       <p>
         <label>
           <input
@@ -103,6 +115,7 @@ export default {
     lastName: '',
     email: '',
     password: '',
+    role: '',
     checkbox: false
   }),
   validations: {
@@ -110,7 +123,12 @@ export default {
     lastName: { required },
     email: { required, email },
     password: { required, minLength: minLength(6) },
+    role: { required },
     checkbox: { checked: (v) => v }
+  },
+  mounted () {
+    // eslint-disable-next-line no-undef
+    M.FormSelect.init(this.$refs.select, {})
   },
   methods: {
     async onSubmit () {
@@ -123,6 +141,7 @@ export default {
         username: this.username,
         lastName: this.lastName,
         email: this.email,
+        role: this.role,
         password: this.password
       }
 

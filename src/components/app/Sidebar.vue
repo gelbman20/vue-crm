@@ -23,7 +23,9 @@ export default {
         { title: 'История', url: '/history' },
         { title: 'Планирование', url: '/planing' },
         { title: 'Новая запись', url: '/record' },
-        { title: 'Категории', url: '/categories' }
+        { title: 'Категории', url: '/categories' },
+        { title: 'Пользователи', url: '/users' },
+        { title: 'Водители', url: '/drivers' }
       ]
     }
   }
