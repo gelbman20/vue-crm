@@ -1,24 +1,40 @@
 <template>
-  <form class="card auth-card">
+  <form class="card auth-card" @submit.prevent="onSubmit">
     <div class="card-content">
       <span class="card-title">Домашняя бухгалтерия</span>
       <div class="input-field">
         <input
           id="email"
           type="text"
-          class="validate"
+          v-model.trim="email"
+          :class="{ invalid: ($v.email.$dirty && !$v.email.required) || ($v.email.$dirty && !$v.email.email)}"
         >
         <label for="email">Email</label>
-        <small class="helper-text invalid">Email</small>
+        <small
+          class="helper-text invalid"
+          v-if="$v.email.$dirty && !$v.email.required"
+        >Поле Email не должно быть пустым</small>
+        <small
+          class="helper-text invalid"
+          v-else-if="$v.email.$dirty && !$v.email.email"
+        >Введите коректный Email</small>
       </div>
       <div class="input-field">
         <input
           id="password"
           type="password"
-          class="validate"
+          :class="{ invalid: ($v.password.$dirty && !$v.password.required) || ($v.password.$dirty && !$v.password.minLength)}"
+          v-model="password"
         >
         <label for="password">Пароль</label>
-        <small class="helper-text invalid">Password</small>
+        <small
+          class="helper-text invalid"
+          v-if="$v.email.$dirty && !$v.password.required"
+        >Поле Password не должно быть пустым</small>
+        <small
+          class="helper-text invalid"
+          v-if="$v.email.$dirty && !$v.password.minLength"
+        >Пароль должен быть больше {{$v.password.$params.minLength.min}} символов, сейчас {{this.password.length}}</small>
       </div>
     </div>
     <div class="card-action">
@@ -34,14 +50,41 @@
 
       <p class="center">
         Нет аккаунта?
-        <a href="/">Зарегистрироваться</a>
+        <router-link to="/register">Зарегистрироваться</router-link>
       </p>
     </div>
   </form>
 </template>
 
 <script>
+import { email, required, minLength } from 'vuelidate/lib/validators'
+
 export default {
-  name: 'Login'
+  name: 'Login',
+  data: () => ({
+    email: '',
+    password: '',
+    passwordMin: 6
+  }),
+  validations: {
+    email: { required, email },
+    password: { required, minLength: minLength(6) }
+  },
+  methods: {
+    onSubmit () {
+      if (this.$v.$invalid) {
+        this.$v.$touch()
+        return true
+      }
+
+      const formData = {
+        email: this.email,
+        password: this.password
+      }
+
+      console.log(formData)
+      this.$router.push('/')
+    }
+  }
 }
 </script>
