@@ -1,4 +1,4 @@
-<temaplte>
+<template>
   <div>
     <div class="page-title">
       <h3>Профиль</h3>
@@ -20,7 +20,7 @@
       </button>
     </form>
   </div>
-</temaplte>
+</template>
 
 <script>
 export default {
