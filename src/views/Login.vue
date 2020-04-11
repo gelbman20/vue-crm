@@ -63,8 +63,7 @@ export default {
   name: 'Login',
   data: () => ({
     email: '',
-    password: '',
-    passwordMin: 6
+    password: ''
   }),
   validations: {
     email: { required, email },
