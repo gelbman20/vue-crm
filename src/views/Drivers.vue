@@ -9,6 +9,7 @@
     <section>
       <SearchPanel
         @search-term="searchTerm"
+        :searchPlaceholder="searchPlaceholder"
       />
       <table v-if="people.length">
         <thead>
@@ -46,7 +47,8 @@ export default {
   data: () => ({
     data: [],
     term: '',
-    loading: false
+    loading: false,
+    searchPlaceholder: 'Поиск по фамилям'
   }),
   name: 'Users',
   components: {
@@ -59,8 +61,8 @@ export default {
       let data = this.data
       if (!this.term) return data
 
-      data = data.filter(({ email }) => {
-        return email.indexOf(this.term) > -1
+      data = data.filter(({ lastName }) => {
+        return lastName.indexOf(this.term) > -1
       })
 
       return data

@@ -1,6 +1,6 @@
 <template>
   <div class="search-wrapper">
-    <input v-model="value" @input="searchTerm" id="search" placeholder="Search">
+    <input v-model="value" @input="searchTerm" id="search" :placeholder="searchPlaceholder">
     <i class="material-icons">search</i>
     <div class="search-results"></div>
   </div>
@@ -12,6 +12,7 @@ export default {
   data: () => ({
     value: ''
   }),
+  props: ['searchPlaceholder'],
   methods: {
     searchTerm () {
       this.$emit('search-term', this.value)

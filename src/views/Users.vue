@@ -9,6 +9,7 @@
     <section>
       <SearchPanel
         @search-term="searchTerm"
+        :searchPlaceholder="searchPlaceholder"
       />
       <table v-if="people.length">
         <thead>
@@ -46,7 +47,8 @@ export default {
   data: () => ({
     data: [],
     term: '',
-    loading: false
+    loading: false,
+    searchPlaceholder: 'Поиск по email'
   }),
   name: 'Users',
   components: {
