@@ -1,41 +1,7 @@
 <template>
   <form class="card auth-card" @submit.prevent="onSubmit">
     <div class="card-content">
-      <span class="card-title">Домашняя бухгалтерия</span>
-      <div class="input-field">
-        <input
-          id="email"
-          type="text"
-          v-model.trim="email"
-          :class="{ invalid: ($v.email.$dirty && !$v.email.required) || ($v.email.$dirty && !$v.email.email)}"
-        >
-        <label for="email">Email</label>
-        <small
-          class="helper-text invalid"
-          v-if="$v.email.$dirty && !$v.email.required"
-        >Поле Email не должно быть пустым</small>
-        <small
-          class="helper-text invalid"
-          v-else-if="$v.email.$dirty && !$v.email.email"
-        >Введите коректный Email</small>
-      </div>
-      <div class="input-field">
-        <input
-          id="password"
-          type="password"
-          v-model="password"
-          :class="{ invalid: ($v.password.$dirty && !$v.password.required) || ($v.password.$dirty && !$v.password.minLength)}"
-        >
-        <label for="password">Пароль</label>
-        <small
-          class="helper-text invalid"
-          v-if="$v.email.$dirty && !$v.password.required"
-        >Поле Password не должно быть пустым</small>
-        <small
-          class="helper-text invalid"
-          v-if="$v.email.$dirty && !$v.password.minLength"
-        >Пароль должен быть больше {{$v.password.$params.minLength.min}} символов, сейчас {{this.password.length}}</small>
-      </div>
+      <span class="card-title">CRM система</span>
       <div class="input-field">
         <input
           id="name"
@@ -61,6 +27,57 @@
           class="helper-text invalid"
           v-if="$v.lastName.$dirty && !$v.lastName.required"
         >Поле Фамилия не должно быть пустым</small>
+      </div>
+      <div class="input-field">
+        <input
+          id="email"
+          type="text"
+          v-model.trim="email"
+          :class="{ invalid: ($v.email.$dirty && !$v.email.required) || ($v.email.$dirty && !$v.email.email)}"
+        >
+        <label for="email">Email</label>
+        <small
+          class="helper-text invalid"
+          v-if="$v.email.$dirty && !$v.email.required"
+        >Поле Email не должно быть пустым</small>
+        <small
+          class="helper-text invalid"
+          v-else-if="$v.email.$dirty && !$v.email.email"
+        >Введите коректный Email</small>
+      </div>
+      <div class="input-field">
+        <input
+          id="phone"
+          type="text"
+          v-model="phone"
+          :class="{ invalid: ($v.email.$dirty && !$v.email.required) || ($v.phone.$dirty && !$v.phone.numeric)}"
+        >
+        <label for="phone">Номер телефона</label>
+        <small
+          class="helper-text invalid"
+          v-if="($v.phone.$dirty && !$v.phone.numeric)"
+        >Не валидный номер телефона</small>
+        <small
+          class="helper-text invalid"
+          v-if="($v.email.$dirty && !$v.email.required) "
+        >Нужно ввести номер телефона</small>
+      </div>
+      <div class="input-field">
+        <input
+          id="password"
+          type="password"
+          v-model="password"
+          :class="{ invalid: ($v.password.$dirty && !$v.password.required) || ($v.password.$dirty && !$v.password.minLength)}"
+        >
+        <label for="password">Пароль</label>
+        <small
+          class="helper-text invalid"
+          v-if="$v.email.$dirty && !$v.password.required"
+        >Поле Password не должно быть пустым</small>
+        <small
+          class="helper-text invalid"
+          v-if="$v.email.$dirty && !$v.password.minLength"
+        >Пароль должен быть больше {{$v.password.$params.minLength.min}} символов, сейчас {{this.password.length}}</small>
       </div>
       <div class="input-field">
         <select ref="select" v-model="role"  >
@@ -107,11 +124,12 @@
 </template>
 
 <script>
-import { email, required, minLength } from 'vuelidate/lib/validators'
+import { email, required, minLength, numeric } from 'vuelidate/lib/validators'
 export default {
   name: 'Register',
   data: () => ({
     username: '',
+    phone: '',
     lastName: '',
     email: '',
     password: '',
@@ -124,7 +142,8 @@ export default {
     email: { required, email },
     password: { required, minLength: minLength(6) },
     role: { required },
-    checkbox: { checked: (v) => v }
+    checkbox: { checked: (v) => v },
+    phone: { numeric }
   },
   mounted () {
     // eslint-disable-next-line no-undef
@@ -140,6 +159,7 @@ export default {
       const formData = {
         username: this.username,
         lastName: this.lastName,
+        phone: this.phone,
         email: this.email,
         role: this.role,
         password: this.password

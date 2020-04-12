@@ -10,11 +10,11 @@
       </div>
     </main>
 
-    <div class="fixed-action-btn">
-      <router-link to="/record" tag="a" class="btn-floating btn-large blue">
-        <i class="large material-icons">add</i>
-      </router-link>
-    </div>
+<!--    <div class="fixed-action-btn">-->
+<!--      <router-link to="/record" tag="a" class="btn-floating btn-large blue">-->
+<!--        <i class="large material-icons">add</i>-->
+<!--      </router-link>-->
+<!--    </div>-->
   </div>
 </template>
 

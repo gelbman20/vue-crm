@@ -3,9 +3,6 @@
     <div class="page-title">
       <h3>Пользователи</h3>
     </div>
-    <div class="history-chart">
-      <canvas></canvas>
-    </div>
     <section>
       <SearchPanel
         @search-term="searchTerm"
@@ -22,7 +19,7 @@
         </thead>
         <tbody>
         <tr v-for="(person, index) of people" :key="person.email">
-          <td>{{index}}</td>
+          <td>{{++index}}</td>
           <td>{{person.username}}</td>
           <td>{{person.lastName}}</td>
           <td>{{person.email}}</td>
