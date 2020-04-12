@@ -28,4 +28,9 @@ export default {
   .toast.error {
     background: #f44336;
   }
+
+  .auth-card {
+    max-width: 500px;
+    width: 100%;
+  }
 </style>

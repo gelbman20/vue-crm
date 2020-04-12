@@ -59,7 +59,7 @@ export default {
       if (!this.term) return data
 
       data = data.filter(({ lastName }) => {
-        return lastName.indexOf(this.term) > -1
+        return lastName.toLowerCase().indexOf(this.term.toLowerCase()) > -1
       })
 
       return data
